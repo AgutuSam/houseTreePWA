@@ -44,7 +44,7 @@ export const SmartMatch = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {aiMatchedProperties.map(property => <div key={property.id} className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700 group">
             <div className="relative aspect-[3/2] overflow-hidden">
-              <img src={property.imageUrl} alt={property.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <img src={property.imageUrl} alt={property.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-150" />
               <div className="absolute top-2 right-2 bg-amber-500 text-white text-xs font-bold rounded-full px-2 py-1 flex items-center">
                 <SparklesIcon className="h-3 w-3 mr-1" />
                 {property.matchScore}% Match
