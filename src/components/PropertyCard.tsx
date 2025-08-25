@@ -45,6 +45,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
     // Increment view count
     try {
       await propertyService.incrementViews(property.id);
+      window.location.href = `/property/${property.id}`;
     } catch (error) {
       console.error('Failed to increment views:', error);
     }
@@ -214,6 +215,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           <button 
             onClick={(e) => {
               e.stopPropagation();
+              handleCardClick();
               onClick?.();
             }}
             className="px-3 py-1 bg-emerald-100 hover:bg-emerald-200 dark:bg-emerald-900/30 dark:hover:bg-emerald-800/50 text-emerald-800 dark:text-emerald-300 rounded-full text-sm font-medium transition-colors"

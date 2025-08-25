@@ -1,6 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { SearchIcon, MapPinIcon, TrendingUpIcon } from 'lucide-react';
+import { db } from '../lib/firebase';
 export const Hero = () => {
+  const [stats, setStats] = useState({
+    totalProperties: 0,
+    totalUsers: 0,
+    featuredProperties: 0,
+    recentActivity: 0
+  });
+
+   useEffect(() => {
+    // Real-time listener for properties count
+    const unsubProperties = onSnapshot(collection(db, 'properties'), (snapshot) => {
+      setStats(prev => ({
+        ...prev,
+        totalProperties: snapshot.size,
+        featuredProperties: snapshot.docs.filter(doc => doc.data().isFeatured).length
+      }));
+    });
+
+    // Real-time listener for users count
+    const unsubUsers = onSnapshot(collection(db, 'users'), (snapshot) => {
+      setStats(prev => ({
+        ...prev,
+        totalUsers: snapshot.size
+      }));
+    });
+
+    // Real-time listener for transactions (activity)
+    const unsubTransactions = onSnapshot(collection(db, 'transactions'), (snapshot) => {
+      setStats(prev => ({
+        ...prev,
+        recentActivity: snapshot.size
+      }));
+    });
+
+    return () => {
+      unsubProperties();
+      unsubUsers();
+      unsubTransactions();
+    };
+  }, []);
   return <div className="relative bg-gradient-to-r from-emerald-600 to-teal-500 text-white">
       <div className="absolute inset-0 bg-black opacity-30"></div>
       <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
@@ -30,7 +71,7 @@ export const Hero = () => {
               </div>
               <div className="text-gray-500 dark:text-gray-400 text-sm">•</div>
               <div className="text-gray-600 dark:text-gray-300 text-sm font-medium">
-                Over 10,000 properties available
+                Over {stats.totalProperties - 1} properties available
               </div>
             </div>
           </div>

@@ -49,7 +49,7 @@ export const FirebaseStatus: React.FC = () => {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Firebase Real-time Status
+          Real-time Status
         </h2>
         <div className="flex items-center text-sm text-green-600 dark:text-green-400">
           <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { MobileNav } from './components/MobileNav';
@@ -12,6 +12,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { AddProperty } from './pages/AddProperty';
 import { ManageProperties } from './pages/ManageProperties';
 import { ManagerDashboard } from './pages/ManagerDashboard';
+import { PropertyDetails } from './pages/PropertyDetails';
 export function App() {
   return <BrowserRouter>
       <ThemeProvider>
@@ -25,7 +26,8 @@ export function App() {
                 <Route path="/saved" element={<Saved />} />
                 <Route path="/messages" element={<Messages />} />
                 <Route path="/profile" element={<Profile />} />
-                
+                {/* Property Details Route */}
+                <Route path="/property/:id" element={<PropertyDetails />} />
                 {/* Property Manager Routes */}
                 <Route path="/dashboard" element={<ManagerDashboard />} />
                 <Route path="/add-property" element={<AddProperty />} />
